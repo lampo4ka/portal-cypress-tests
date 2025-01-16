@@ -1,13 +1,12 @@
 Cypress.Commands.add('closeCookies', () => {
-  cy.contains('Close this dialog')
+  cy.contains('Reject All')
     .should('be.visible')
     .wait(500)
     .click()
 })
 
 Cypress.Commands.add('login', ({username, password, isValidUser = true}) => {
-      cy.visit('https://wave-trial.getbynder.com/login/')
-      cy.closeCookies();
+  cy.closeCookies()
       // cy.contains('Close this dialog')
       //   .should('be.visible')
       //   .wait(300)
