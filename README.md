@@ -17,6 +17,11 @@ When The user enters non-existing username and password
 And The user clicks on the login button
 Then The message of an incorrect username and password should be displayed
 
+Scenario: Lost password
+Given The user is on the login page https://wave-trial.getbynder.com/login/
+When The user clicks on Lost password
+Then Reset password form should be displayed
+
 # Installation
 
 # Run in Docker

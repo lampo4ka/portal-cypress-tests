@@ -33,6 +33,28 @@ describe('User login and logout', () => {
           .type("username")
         cy.contains('Login').click()
     })
+  });
+
+  it.skip("should reset password", () => {
+    cy.visit('https://wave-trial.getbynder.com/login/')
+    cy.get('@loginData').then((data) => {
+      const { username } = data.invalidUser
+      cy.closeCookies();
+      cy.contains('Lost password?').click()
+      cy.url().should('contain', '/forgotPassword')
+      cy.get('[placeholder="Email"]').type(username)
+      cy.contains('Send instructions').click()
+      cy.url().should('contain', '/login')
+    })
+  });
+
+  it("should cancel reset password", () => {
+    cy.visit('https://wave-trial.getbynder.com/login/')
+      cy.closeCookies();
+      cy.contains('Lost password?').click()
+      cy.url().should('contain', '/forgotPassword')
+      cy.contains('Cancel').click()
+      cy.url().should('contain', '/login')
 
   });
 })
