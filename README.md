@@ -22,7 +22,7 @@ When user enters non-existing username and password
 And user clicks on the login button
 Then message of an incorrect username and password should be displayed
 
-- Scenario: should display logo
+- Scenario: should display logo in login form
 Given user is on the login page https://wave-trial.getbynder.com/login/
 When user click the logo
 Then user should be remain on login page
@@ -48,6 +48,26 @@ Given The user is on the login page https://wave-trial.getbynder.com/login/
 When user clicks on Lost password
 And user clicks on Cancel
 Then user should be redirected to the login page
+
+- Scenario: should redirect to main page
+Given The user is on the login page https://wave-trial.getbynder.com/login/
+When user clicks on Bynder logo
+Then user should be redirected to the main page
+
+- Scenario: language button should display different options
+Given The user is on the login page https://wave-trial.getbynder.com/login/
+When user clicks on Language
+Then list of langueges should be displayed
+
+- Scenario: support button should be displayed
+Given The user is on the login page https://wave-trial.getbynder.com/login/
+When login page is loaded
+Then support button should be displayed
+
+- Scenario: cookie button should be displayed
+Given The user is on the login page https://wave-trial.getbynder.com/login/
+When login page is loaded
+Then cookie button should be displayed
 
 ## Installation
 

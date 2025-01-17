@@ -1,12 +1,12 @@
 Cypress.Commands.add('closeCookies', () => {
-  cy.contains('Reject All')
+  cy.contains('Reject All', {timeout: 10000})
+    // .wait(500)
     .should('be.visible')
-    .wait(500)
     .click()
 })
 
 Cypress.Commands.add('login', ({username, password, isValidUser = true}) => {
-  cy.closeCookies()
+  // cy.closeCookies()
       // cy.contains('Close this dialog')
       //   .should('be.visible')
       //   .wait(300)
