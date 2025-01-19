@@ -28,39 +28,65 @@ describe('Top-rated movie api tests', () => {
         
     })
 
-    it.only('should make correct pagination', () => {
-        cy.topRatedMovieRequest({apiUrl, apiKey, page: 496}).then(data => {
-            const {
-                page,
-                total_pages,
-                total_results
-              } = data;
-            cy.wrap(total_pages).as('total_pages_1')
-            cy.wrap(total_results).as('total_results_1')
-            expect(page).to.eq(496)
-
-            cy.topRatedMovieRequest({apiUrl, apiKey}).then(data => {
+    context('Pagination', () => {
+        it('should make correct pagination', () => {
+            cy.log('Send request with page param with max value');
+            cy.topRatedMovieRequest({apiUrl, apiKey, page: 496}).then(data => {
                 const {
+                    page,
                     total_pages,
                     total_results
                   } = data;
-                cy.wrap(total_pages).as('total_pages_2')
-                cy.wrap(total_results).as('total_results_2')
-                
-                cy.get('@total_pages_1').then(total_pages_1 => {
-                    cy.get('@total_pages_2').then(total_pages_2 => {
-                        expect(total_pages_1).to.eq(total_pages_2)
+                cy.wrap(total_pages).as('total_pages_1')
+                cy.wrap(total_results).as('total_results_1')
+                expect(page).to.eq(496)
+    
+                cy.log('Send request with page param with default(1) value');
+                cy.topRatedMovieRequest({apiUrl, apiKey}).then(data => {
+                    const {
+                        total_pages,
+                        total_results
+                      } = data;
+                    cy.wrap(total_pages).as('total_pages_2')
+                    cy.wrap(total_results).as('total_results_2')
                     
+                    cy.get('@total_pages_1').then(total_pages_1 => {
+                        cy.get('@total_pages_2').then(total_pages_2 => {
+                            expect(total_pages_1).to.eq(total_pages_2)
+                        
+                        })
                     })
-                })
-                cy.get('@total_results_1').then(total_results_1 => {
-                    cy.get('@total_results_2').then(total_results_2 => {
-                        expect(total_results_1).to.eq(total_results_2)
+                    cy.get('@total_results_1').then(total_results_1 => {
+                        cy.get('@total_results_2').then(total_results_2 => {
+                            expect(total_results_1).to.eq(total_results_2)
+                        })
                     })
                 })
             })
         })
+
+        it('should have empty results', () => {
+            cy.log('Send page param with value beyond the range');
+            cy.topRatedMovieRequest({apiUrl, apiKey, page: 500}).then(data => {
+                const {
+                    status,
+                    results,
+                    page,
+                    total_pages,
+                    total_results
+                  } = data;
+                expect(status).to.equal(200)
+                expect(results).to.be.an('array')
+                expect(results.length).to.eq(0);
+                expect(page).to.eq(500)
+                expect(total_pages).to.eq(496)
+                expect(total_results).to.eq(9903)
+            })
+            
+        })
     })
+
+    
     
     it('should get 401 status code', () => {
         cy.request({
