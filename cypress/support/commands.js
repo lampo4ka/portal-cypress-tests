@@ -42,7 +42,7 @@ Cypress.Commands.add('topRatedMovieRequest', ({apiUrl, apiKey, page}) => {
       status_code,
       status_message 
     } = body;
-    
+
     return {
       body,
       status,
@@ -50,6 +50,39 @@ Cypress.Commands.add('topRatedMovieRequest', ({apiUrl, apiKey, page}) => {
       page,
       total_pages,
       total_results,
+      success,
+      status_code,
+      status_message
+    }
+  })
+})
+
+Cypress.Commands.add('saveMovieRateRequest', ({apiUrl, apiToken, movieId}) => {
+  
+  cy.log('Send POST request to save movie rate');
+
+  cy.request({
+    method: 'POST',
+    url: `${apiUrl}/${movieId}/rating`,
+    failOnStatusCode: false,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Authorization': apiToken      
+    },
+    body: {       
+      "value": "10",
+    }
+  })
+  .then(response => {
+    const { status, body } = response;
+    const {
+      success,
+      status_code,
+      status_message 
+    } = body;
+    
+    return {
+      status,
       success,
       status_code,
       status_message

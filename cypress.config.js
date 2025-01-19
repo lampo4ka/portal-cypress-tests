@@ -5,7 +5,8 @@ module.exports = defineConfig({
     baseUrl: 'https://wave-trial.getbynder.com/',
     specPattern: [
       // 'cypress/e2e/*.cy.js',
-      'cypress/api/*.cy.js'
+      // 'cypress/api/top-rated-movies.cy.js',
+      'cypress/api/save-movie-rate.cy.js',
 
     ],
     setupNodeEvents(on, config) {
