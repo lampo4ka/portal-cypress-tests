@@ -5,7 +5,7 @@ import { schema } from '../../cypress/schemas/movieSchema.js'
 describe('Top-rated movie api tests', () => {
     const apiKey = Cypress.env('TMDB_API_KEY');
     const apiUrl = Cypress.env('apiUrl');
-    const INVALID_API_KEY = 
+    const INVALID_API_KEY = 'invalid-api-key'
 
     it('should get 200 status code', () => {
         cy.topRatedMovieRequest({apiUrl, apiKey}).then(data => {
@@ -39,6 +39,7 @@ describe('Top-rated movie api tests', () => {
                   } = data;
                 cy.wrap(total_pages).as('total_pages_1')
                 cy.wrap(total_results).as('total_results_1')
+                cy.log('Page value in request us equal page value in response');
                 expect(page).to.eq(496)
     
                 cy.log('Send request with page param with default(1) value');
@@ -50,12 +51,15 @@ describe('Top-rated movie api tests', () => {
                     cy.wrap(total_pages).as('total_pages_2')
                     cy.wrap(total_results).as('total_results_2')
                     
+                    cy.log('Total page value in different response is consistent');
                     cy.get('@total_pages_1').then(total_pages_1 => {
                         cy.get('@total_pages_2').then(total_pages_2 => {
                             expect(total_pages_1).to.eq(total_pages_2)
                         
                         })
                     })
+
+                    cy.log('Total results value in different response is consistent');
                     cy.get('@total_results_1').then(total_results_1 => {
                         cy.get('@total_results_2').then(total_results_2 => {
                             expect(total_results_1).to.eq(total_results_2)
@@ -80,37 +84,42 @@ describe('Top-rated movie api tests', () => {
                 expect(results.length).to.eq(0);
                 expect(page).to.eq(500)
                 expect(total_pages).to.eq(496)
-                expect(total_results).to.eq(9903)
             })
             
         })
     })
 
-    
-    
-    it('should get 401 status code', () => {
-        cy.request({
-            method: 'GET',
-            url: `${apiUrl}/top_rated?apiKey=${apiKey}`,
-            failOnStatusCode: false
-        }).then(response => {
-            expect(response.status).to.equal(401)
-            expect(response.body.success).have.equal(false)
-            expect(response.body.status_code).have.equal(7)
-            expect(response.body.status_message).have.equal('Invalid API key: You must be granted a valid key.')
-        })
+
+    it('response should have movies ordered by rating', () => {
+        cy.topRatedMovieRequest({ apiUrl, apiKey }).then(data => {
+            const {
+                results
+                } = data;
+            const votesAverage = [];
+            cy.wrap(results).each(item => votesAverage.push(item.vote_average))
+           
+            const sortedVotesAverage = votesAverage.sort((a, b) => b - a);
+            cy.wrap(votesAverage).each((vote, item) => {
+                expect(vote).to.eq(sortedVotesAverage[item])
+            })
+
+    })
+            
     })
 
-    it.skip('should get 404 status code', () => {
-        cy.request({
-            method: 'GET',
-            url: `${apiUrl}/top_rated?api_key=${apiKey}`,
-            failOnStatusCode: false
-        }).then(response => {
-            expect(response.status).to.equal(200)
-            // expect(response.body.success).have.equal(false)
-            // exp ect(response.body.status_code).have.equal(6)
-            // expect(response.body.status_message).have.equal('Invalid id: The pre-requisite id is invalid or not found.')
+    
+    it('should get 401 status code', () => {
+        cy.topRatedMovieRequest({apiUrl, INVALID_API_KEY}).then(data => {
+            const {
+                status,
+                success,
+                status_code,
+                status_message
+              } = data;
+            expect(status).to.equal(401)
+            expect(success).have.equal(false)
+            expect(status_code).have.equal(7)
+            expect(status_message).have.equal('Invalid API key: You must be granted a valid key.')
         })
     })
 

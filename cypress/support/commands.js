@@ -33,14 +33,26 @@ Cypress.Commands.add('topRatedMovieRequest', ({apiUrl, apiKey, page}) => {
   })
   .then(response => {
     const { status, body } = response;
-    const { results, page, total_pages, total_results } = body;
+    const { 
+      results,
+      page,
+      total_pages,
+      total_results,
+      success,
+      status_code,
+      status_message 
+    } = body;
+    
     return {
       body,
       status,
       results,
       page,
       total_pages,
-      total_results
+      total_results,
+      success,
+      status_code,
+      status_message
     }
   })
 })
