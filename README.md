@@ -1,5 +1,18 @@
 # Portal-cypress-tests
 
+## Tests
+
+| Type      | Location                                 |
+| --------- | ---------------------------------------- |
+| ui        | [cypress/e2e](./cypress/e2e)   |
+| api       | [cypress/api](./cypress/api) |
+
+## Start Cypress
+
+```shell
+npm cypress:open
+```
+
 ## Test cases
 
 ### Feature: Portal login
@@ -71,4 +84,6 @@ Then cookie button should be displayed
 
 ## Installation
 
-## Run in Docker
+## Run with Docker
+
+docker build -t test-ui . && docker run -rm test-ui
