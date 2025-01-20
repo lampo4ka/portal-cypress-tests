@@ -4,5 +4,5 @@ api-reports
 /portal-ui-tests/cypress/fixtures/login-data.json
 /portal-ui-tests/cypress/screenshots/
 /load-tests/html-report.html
-/portal-ui-tests/results/
+results/
 .DS_Store
