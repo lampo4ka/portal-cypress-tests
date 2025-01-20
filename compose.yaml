@@ -1,0 +1,13 @@
+services:
+  portal-ui-tests:
+    build:
+      context: ./portal-ui-tests
+    command: npm run ui-tests
+    volumes:
+      - ./ui-reports:/results
+  portal-api-tests:
+    build:
+      context: ./portal-ui-tests
+    command: npm run api-tests
+    volumes:
+      - ./api-reports:/results
