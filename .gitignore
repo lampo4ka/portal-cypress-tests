@@ -1,3 +1,4 @@
 node_modules/
-cypress/fixtures/login-data.json
-cypress/screenshots/
+/portal-ui-tests/cypress/fixtures/login-data.json
+/portal-ui-tests/cypress/screenshots/
+.DS_Store
