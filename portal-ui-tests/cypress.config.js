@@ -9,6 +9,12 @@ module.exports = defineConfig({
       'cypress/api/save-movie-rate.cy.js',
 
     ],
+    reporter: 'junit',
+    reporterOptions: {
+      mochaFile: 'results/test-results-[hash].xml',
+      outputs: true,
+      testCaseSwitchClassnameAndName: true
+  },
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
