@@ -88,5 +88,22 @@ describe('Save movie rate api tests', () => {
         
     })
 
+    it.only('should get 400 status code - request parameters are incorrect', () => {
+        cy.log('Send request w/o body')
+        cy.saveMovieRateRequest({apiUrl, apiToken, movieId, rate : 0, hasBody: false }).then(data => {
+            const {
+                status,
+                success,
+                status_code,
+                status_message 
+              } = data;
+            expect(status).to.equal(400)
+            expect(success).to.equal(false)
+            expect(status_code).to.equal(5)
+            expect(status_message).to.equal("Invalid parameters: Your request parameters are incorrect.")
+        })
+        
+    })
+
    
 })

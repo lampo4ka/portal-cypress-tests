@@ -57,7 +57,7 @@ Cypress.Commands.add('topRatedMovieRequest', ({apiUrl, apiKey, page}) => {
   })
 })
 
-Cypress.Commands.add('saveMovieRateRequest', ({apiUrl, apiToken, movieId, rate}) => {
+Cypress.Commands.add('saveMovieRateRequest', ({apiUrl, apiToken, movieId, rate, hasBody = true}) => {
   
   cy.log('Send POST request to save movie rate');
 
@@ -69,9 +69,11 @@ Cypress.Commands.add('saveMovieRateRequest', ({apiUrl, apiToken, movieId, rate})
       'Content-Type': 'application/json;charset=utf-8',
       'Authorization': apiToken      
     },
-    body: {       
+    body: hasBody 
+      ? {       
       "value": rate,
-    }
+      }
+      : {}
   })
   .then(response => {
     const { status, body } = response;
