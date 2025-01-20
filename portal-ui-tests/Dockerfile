@@ -9,4 +9,8 @@ COPY ./cypress.config.js ./cypress.config.js
 COPY ./reporter-config.json ./reporter-config.json
 COPY ./cypress ./cypress
 
+ENV USERNAME ''
+ENV PASSWORD ''
+ENV NAME ''
+
 CMD [ "npm run ui-test" ]

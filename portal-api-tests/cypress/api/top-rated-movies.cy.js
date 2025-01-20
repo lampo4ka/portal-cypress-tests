@@ -3,7 +3,7 @@ import { validateSchema } from 'cypress-ajv-schema-validator';
 
 import { schema } from '../../cypress/schemas/movieSchema.js';
 describe('Top-rated movie api tests', () => {
-    const apiKey = Cypress.env('TMDB_API_KEY');
+    const apiKey = Cypress.env('tmdbApiKey');
     const apiUrl = Cypress.env('apiUrl');
     const INVALID_API_KEY = 'invalid-api-key';
 

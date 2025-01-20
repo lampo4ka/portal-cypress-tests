@@ -14,5 +14,7 @@ module.exports = defineConfig({
 
     env: {
         apiUrl: 'https://api.themoviedb.org/3/movie',
+        tmdbApiKey: process.env.TMDB_API_KEY,
+        tmdbApiToken: `Bearer ${process.env.TMDB_API_TOKEN}`,
     },
 });

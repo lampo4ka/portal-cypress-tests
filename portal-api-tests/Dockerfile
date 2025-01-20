@@ -6,8 +6,10 @@ COPY ./package-lock.json ./package-lock.json
 RUN npm ci
 
 COPY ./cypress.config.js ./cypress.config.js 
-COPY ./cypress.env.json ./cypress.env.json
 COPY ./reporter-config.json ./reporter-config.json
 COPY ./cypress ./cypress
+
+ARG TMDB_API_KEY ''
+ARG TMDB_API_TOKEN ''
 
 CMD [ "npm run api-test" ]

@@ -2,10 +2,14 @@ services:
   ui-tests:
     build:
       context: ./portal-ui-tests
+    env_file:
+      - .env
     volumes:
       - ./ui-reports:/results
   api-tests:
     build:
       context: ./portal-api-tests
+    env_file:
+      - .env
     volumes:
       - ./api-reports:/results

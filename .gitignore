@@ -1,8 +1,8 @@
 node_modules/
 ui-reports
 api-reports
-/portal-ui-tests/cypress/fixtures/login-data.json
 /portal-ui-tests/cypress/screenshots/
 /load-tests/html-report.html
 results/
 .DS_Store
+.env

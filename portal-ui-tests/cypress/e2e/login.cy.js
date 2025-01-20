@@ -5,19 +5,17 @@ describe('User login and logout', () => {
     });
 
     it('should redirect to dashboard page with valid user', () => {
-        cy.get('@loginData').then((data) => {
-            const { username, password } = data.validUser;
-            cy.login({ username, password });
-        });
+        const username = Cypress.env('username');
+        const password = Cypress.env('password');
+
+        cy.login({ username, password });
     });
 
     it('should remain on login page when only password is entered', () => {
-        cy.get('@loginData').then((data) => {
-            const { password } = data.validUser;
-            cy.get('[placeholder="Password"]').type(password);
-            cy.contains('Login').click();
-            cy.url().should('contain', '/login');
-        });
+        const password = Cypress.env('password');
+        cy.get('[placeholder="Password"]').type(password);
+        cy.contains('Login').click();
+        cy.url().should('contain', '/login');
     });
 
     it('should remain on login page when no credentials are entered', () => {
@@ -26,12 +24,10 @@ describe('User login and logout', () => {
     });
 
     it('should remain on login page when only email is entered', () => {
-        cy.get('@loginData').then((data) => {
-            const { username } = data.validUser;
-            cy.get('[placeholder="Email/Username"]').type(username);
-            cy.contains('Login').click();
-            cy.url().should('contain', '/login');
-        });
+        const username = Cypress.env('username');
+        cy.get('[placeholder="Email/Username"]').type(username);
+        cy.contains('Login').click();
+        cy.url().should('contain', '/login');
     });
 
     it('should display logo in login form', () => {
@@ -43,16 +39,14 @@ describe('User login and logout', () => {
     });
 
     it('should redirect to the login page after logout', () => {
-        cy.get('@loginData').then((data) => {
-            const { username, password, name } = data.validUser;
-            cy.login({ username, password });
-            cy.contains(name).click();
-            cy.contains('Logout').click();
-            cy.url().should('contain', '/login');
-            cy.contains('You have successfully logged out.').should(
-                'be.visible',
-            );
-        });
+        const username = Cypress.env('username');
+        const password = Cypress.env('password');
+        const name = Cypress.env('name');
+        cy.login({ username, password });
+        cy.contains(name).click();
+        cy.contains('Logout').click();
+        cy.url().should('contain', '/login');
+        cy.contains('You have successfully logged out.').should('be.visible');
     });
 
     it('should show error message', () => {
