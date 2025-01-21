@@ -5,7 +5,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./ui-reports:/results
+      - ./ui-reports:/app/cypress/results
   api-tests:
     build:
       context: ./api-tests

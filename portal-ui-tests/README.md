@@ -33,16 +33,16 @@ npm i
 1. Create `.env` file:
 
 ```env
-USERNAME="john.doe@real-business.biz"
-PASSWORD="strongest-password-ever"
-NAME="John Doe"
+USERNAME=john.doe@real-business.biz
+PASSWORD=strongest-password-ever
+NAME=John Doe
 ```
 
 2. Build and run
 
 ```bash
-docker build -t ui-test .
-docker run -it --env-file .env --rm ui-test
+docker build -t ui-tests .
+docker run -it --env-file .env --rm ui-tests
 ```
 
 ## Test cases
