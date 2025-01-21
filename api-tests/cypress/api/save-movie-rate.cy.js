@@ -1,11 +1,6 @@
 import { getTopRatedMovies, saveMovieRating } from '../entities/movies';
 
 describe('Save movie rate api tests', () => {
-    const apiKey = Cypress.env('tmdbApiKey');
-    const apiToken = Cypress.env('tmdbApiToken');
-    const apiUrl = Cypress.env('apiUrl');
-    const INVALID_API_TOKEN = 'invalid-api-token';
-
     let movieId;
 
     before(() => {
