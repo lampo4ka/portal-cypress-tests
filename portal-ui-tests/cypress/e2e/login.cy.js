@@ -1,18 +1,18 @@
-describe('User login and logout', () => {
+import { validUser, invalidUser, languageNames } from '../data/login-data';
+
+describe('User login', () => {
     beforeEach(() => {
         cy.visit('login/');
-        cy.fixture('login-data.json').as('loginData');
     });
 
     it('should redirect to dashboard page with valid user', () => {
-        const username = Cypress.env('username');
-        const password = Cypress.env('password');
 
-        cy.login({ username, password });
+        cy.login(validUser);
+
     });
 
     it('should remain on login page when only password is entered', () => {
-        const password = Cypress.env('password');
+        const { password } = validUser
         cy.get('[placeholder="Password"]').type(password);
         cy.contains('Login').click();
         cy.url().should('contain', '/login');
@@ -24,7 +24,7 @@ describe('User login and logout', () => {
     });
 
     it('should remain on login page when only email is entered', () => {
-        const username = Cypress.env('username');
+        const { username } = validUser
         cy.get('[placeholder="Email/Username"]').type(username);
         cy.contains('Login').click();
         cy.url().should('contain', '/login');
@@ -39,10 +39,8 @@ describe('User login and logout', () => {
     });
 
     it('should redirect to the login page after logout', () => {
-        const username = Cypress.env('username');
-        const password = Cypress.env('password');
-        const name = Cypress.env('name');
-        cy.login({ username, password });
+        const { name } = validUser
+        cy.login(validUser);
         cy.contains(name).click();
         cy.contains('Logout').click();
         cy.url().should('contain', '/login');
@@ -51,9 +49,7 @@ describe('User login and logout', () => {
 
     it('should show error message', () => {
         cy.closeCookies();
-        cy.get('@loginData').then((data) => {
-            const { username, password } = data.invalidUser;
-            cy.login({ username, password, isValidUser: false });
+            cy.login({ ...invalidUser, isValidUser: false });
             cy.get('[placeholder="Enter above word(s)"]').type('username');
             cy.contains('Login').click();
             cy.url().should('contain', '/login');
@@ -65,19 +61,16 @@ describe('User login and logout', () => {
                 'p',
                 'You have entered an incorrect username or password.',
             );
-        });
     });
 
     it.skip('should reset password', () => {
         cy.visit('https://wave-trial.getbynder.com/login/');
-        cy.get('@loginData').then((data) => {
-            const { username } = data.invalidUser;
+            const { username } = invalidUser;
             cy.contains('Lost password?').click();
             cy.url().should('contain', '/forgotPassword');
             cy.get('[placeholder="Email"]').type(username);
             cy.contains('Send instructions').click();
             cy.url().should('contain', '/login');
-        });
     });
 
     it('should cancel reset password', () => {
@@ -98,14 +91,10 @@ describe('User login and logout', () => {
     });
 
     it('language button should display different options', () => {
-        cy.fixture('localization-data.json').as('languageNames');
-        cy.get('@languageNames').then((data) => {
-            const { names } = data;
             cy.contains('Language').click();
-            cy.wrap(names).each((name) => {
+            cy.wrap(languageNames).each((name) => {
                 cy.contains(name).should('be.visible');
             });
-        });
     });
 
     it('support button should be displayed', () => {

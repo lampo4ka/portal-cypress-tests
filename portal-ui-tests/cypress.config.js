@@ -9,9 +9,4 @@ module.exports = defineConfig({
             configFile: 'reporter-config.json',
         },
     },
-    env: {
-        username: process.env.USERNAME,
-        password: process.env.PASSWORD,
-        name: process.env.NAME,
-    },
 });
