@@ -1,16 +1,48 @@
 # Portal-cypress-tests
 
-## Tests
+## Prerequisites
 
-| Type | Location                     |
-| ---- | ---------------------------- |
-| ui   | [cypress/e2e](./cypress/e2e) |
-| api  | [cypress/api](./cypress/api) |
+Node.js and npm
+Docker (optional)
 
-## Start Cypress
+## Local Setup
 
-```shell
-npm cypress:open
+1. Install dependencies:
+
+```bash
+npm i
+```
+
+2. Create `./cypress.env.json`:
+
+```json
+{
+    "username": "john.doe@real-business.biz",
+    "password": "strongest-password-ever",
+    "name": "John Doe"
+}
+```
+
+3. Run tests
+
+- Open Cypress: `npm start`
+- Run in headless mode: `npm run headless`
+
+## Docker Setup
+
+1. Create `.env` file:
+
+```env
+USERNAME="john.doe@real-business.biz"
+PASSWORD="strongest-password-ever"
+NAME="John Doe"
+```
+
+2. Build and run
+
+```bash
+docker build -t ui-test .
+docker run -it --env-file .env --rm ui-test
 ```
 
 ## Test cases
@@ -77,9 +109,3 @@ npm cypress:open
 **When** user clicks on Lost password
 **And** user clicks on Cancel
 **Then** user should be redirected to the login page
-
-## Installation
-
-## Run with Docker
-
-docker build -t test-ui . && docker run -rm test-ui

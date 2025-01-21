@@ -9,8 +9,8 @@ COPY ./docker.cypress.config.js ./cypress.config.js
 COPY ./reporter-config.json ./reporter-config.json
 COPY ./cypress ./cypress
 
-ENV USERNAME ''
-ENV PASSWORD ''
-ENV NAME ''
+ENV USERNAME=''
+ENV PASSWORD=''
+ENV NAME=''
 
-CMD [ "npm run start:docker" ]
+CMD [ "npm run headless" ]

@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "start": "cypress open",
-        "start:docker": "cypress run"
+        "headless": "cypress run"
     },
     "keywords": [],
     "author": "",
