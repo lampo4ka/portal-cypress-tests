@@ -1,6 +1,6 @@
 export function getTopRatedMovies(
     page,
-    options = { validate: true, expectedStatus: 200},
+    options = { validate: true, expectedStatus: 200 },
 ) {
     const { validate, expectedStatus } = options;
 

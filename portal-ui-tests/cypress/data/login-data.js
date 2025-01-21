@@ -1,7 +1,7 @@
 export const validUser = {
     username: Cypress.env('username'),
     password: Cypress.env('password'),
-    name: 'kristina sugoniak'
+    name: Cypress.env('name'),
 };
 
 export const invalidUser = {
@@ -10,10 +10,10 @@ export const invalidUser = {
 };
 
 export const languageNames = [
-    "Nederlands (Nederland)",
-    "English (United States)",
-    "Français (France)",
-    "Deutsch (Deutschland)",
-    "Italiano (Italia)",
-    "Español (España)"
-]
+    'Nederlands (Nederland)',
+    'English (United States)',
+    'Français (France)',
+    'Deutsch (Deutschland)',
+    'Italiano (Italia)',
+    'Español (España)',
+];

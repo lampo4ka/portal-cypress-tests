@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "ui-test": "cypress run --spec \"cypress/e2e/*\""
+        "start": "cypress open",
+        "start:docker": "cypress run"
     },
     "keywords": [],
     "author": "",

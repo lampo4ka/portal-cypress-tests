@@ -6,13 +6,11 @@ describe('User login', () => {
     });
 
     it('User should be redirected to dashboard page with valid credentials', () => {
-
         cy.login(validUser);
-
     });
 
     it('User should be redirected to login page after logout', () => {
-        const { name } = validUser
+        const { name } = validUser;
         cy.login(validUser);
         cy.contains(name).click();
         cy.contains('Logout').click();
@@ -22,29 +20,26 @@ describe('User login', () => {
 
     it('User sees error message when logging in with invalid credentials', () => {
         cy.closeCookies();
-            cy.login({ ...invalidUser, isValidUser: false });
-            cy.get('[placeholder="Enter above word(s)"]').type('username');
-            cy.contains('Login').click();
-            cy.url().should('contain', '/login');
-            cy.contains(
-                'h1',
-                'You have entered an incorrect username or password.',
-            );
-            cy.contains(
-                'p',
-                'You have entered an incorrect username or password.',
-            );
+        cy.login({ ...invalidUser, isValidUser: false });
+        cy.get('[placeholder="Enter above word(s)"]').type('username');
+        cy.contains('Login').click();
+        cy.url().should('contain', '/login');
+        cy.contains(
+            'h1',
+            'You have entered an incorrect username or password.',
+        );
+        cy.contains('p', 'You have entered an incorrect username or password.');
     });
 
     it('User remains logged out when only email is entered', () => {
-        const { username } = validUser
+        const { username } = validUser;
         cy.get('[placeholder="Email/Username"]').type(username);
         cy.contains('Login').click();
         cy.url().should('contain', '/login');
     });
 
     it('User remains logged out when only password is entered', () => {
-        const { password } = validUser
+        const { password } = validUser;
         cy.get('[placeholder="Password"]').type(password);
         cy.contains('Login').click();
         cy.url().should('contain', '/login');
@@ -80,15 +75,16 @@ describe('User login', () => {
         cy.contains('Cookies').should('be.visible');
     });
 
-
-    it.skip('Reset password form should be displayed', () => {
+    it('Reset password form should be displayed', () => {
         cy.visit('https://wave-trial.getbynder.com/login/');
-            const { username } = invalidUser;
-            cy.contains('Lost password?').click();
-            cy.url().should('contain', '/forgotPassword');
-            cy.get('[placeholder="Email"]').type(username);
-            cy.contains('Send instructions').click();
-            cy.url().should('contain', '/login');
+        const { username } = invalidUser;
+
+        cy.contains('Lost password?').click();
+        cy.url().should('contain', '/forgotPassword');
+        cy.closeCookies();
+
+        cy.get('[placeholder="Email"]').should('be.visible');
+        cy.contains('Send instructions').should('be.visible');
     });
 
     it('User cancels reset password process', () => {

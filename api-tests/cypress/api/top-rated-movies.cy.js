@@ -1,4 +1,4 @@
-import {getTopRatedMovies} from '../entities/movies'
+import { getTopRatedMovies } from '../entities/movies';
 
 describe('Top-rated movie api tests', () => {
     it('Request should get 200 status code', () => {
@@ -44,17 +44,18 @@ describe('Top-rated movie api tests', () => {
         it('Request should have empty results', () => {
             cy.log('Send page param with value beyond the range');
 
-            getTopRatedMovies(1)
-                .then((response1) => {
-                    const fakeTotalPage = response1.body.total_pages + 1
-                    getTopRatedMovies(fakeTotalPage).then(response2 => {
-                        expect(response2.status).to.equal(200);
-                        expect(response2.body.results.length).to.eq(0);
-                        expect(response2.body.page).to.eq(fakeTotalPage);
-                        expect(response2.body.total_pages).to.eq(response1.body.total_pages);
-                    })
+            getTopRatedMovies(1).then((response1) => {
+                const fakeTotalPage = response1.body.total_pages + 1;
+                getTopRatedMovies(fakeTotalPage).then((response2) => {
+                    expect(response2.status).to.equal(200);
+                    expect(response2.body.results.length).to.eq(0);
+                    expect(response2.body.page).to.eq(fakeTotalPage);
+                    expect(response2.body.total_pages).to.eq(
+                        response1.body.total_pages,
+                    );
+                });
+            });
         });
-    });
     });
 
     it('Response should have movies ordered by rating', () => {

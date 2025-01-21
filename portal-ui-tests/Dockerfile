@@ -13,4 +13,4 @@ ENV USERNAME ''
 ENV PASSWORD ''
 ENV NAME ''
 
-CMD [ "npm run ui-test" ]
+CMD [ "npm run start:docker" ]
