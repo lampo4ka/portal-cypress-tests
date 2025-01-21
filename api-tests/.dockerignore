@@ -1,0 +1,9 @@
+.env
+.gitignore
+.prettierrc
+.prettierignore
+Dockerfile
+eslint-config.mjs
+README.md
+node_modules
+cypress.env.json

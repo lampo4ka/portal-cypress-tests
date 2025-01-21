@@ -7,6 +7,9 @@ module.exports = defineConfig({
         reporterOptions: {
             configFile: 'reporter-config.json',
         },
-        retries: 2,
-    }
+        retries: 2
+    },
+    env: {
+        tmdbApiToken: process.env.TMDB_API_TOKEN
+    },
 });

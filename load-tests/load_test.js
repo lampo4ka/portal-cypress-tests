@@ -1,7 +1,8 @@
 import { check, sleep } from "k6";
+import http from "k6/http";
 
-export let options = {
-  scenarios: {
+export const options = {
+    scenarios: {
       my_scenario: {
         executor: 'ramping-arrival-rate',
 
@@ -31,12 +32,17 @@ export let options = {
 };
 
 export default function () {
-  let res = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
+  const TMDB_API_KEY = __ENV.TMDB_API_KEY;
+  const urlToLoad = `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}`;
+
+  let res = http.get(urlToLoad); 
+
   check(res, {
     "status is 200": (r) => r.status === 200,
     "response time < 200ms": (r) => r.timings.duration < 200,
     "status is not 429": (r) => r.status !== 429,
     "status is not 500": (r) => r.status !== 500,
   });
+
   sleep(1);
 }

@@ -13,10 +13,11 @@ Docker (optional)
 npm i
 ```
 
-2. Create `./cypress.env.json`:
+2. Create `./cypress.env.json`: 
 
 ```json
 {
+    // The credentials were provided in the email
     "username": "john.doe@real-business.biz",
     "password": "strongest-password-ever",
     "name": "John Doe"
@@ -33,6 +34,7 @@ npm i
 1. Create `.env` file:
 
 ```env
+# The credentials were provided in the email
 USERNAME=john.doe@real-business.biz
 PASSWORD=strongest-password-ever
 NAME=John Doe

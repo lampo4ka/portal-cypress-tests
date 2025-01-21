@@ -8,8 +8,15 @@ A basic load test suite for [movie-top-rated-list](https://developer.themoviedb.
 
 ## Running the Test
 
+1. Create .env file and define `TMDB_API_KEY` there. The key was provided in the email
+```env
+TMDB_API_KEY=<tmdb api key goes here>
+```
+
+2. Run bash script
+
 ```bash
-K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=html-report.html k6 run load_test.js
+sh ./run.sh
 ```
 Open [http://127.0.0.1:5665/ui/?endpoint=/](http://127.0.0.1:5665/ui/?endpoint=/) to see testing in progress
 
