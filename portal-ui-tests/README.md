@@ -17,70 +17,67 @@ npm cypress:open
 
 ### Feature: Portal login
 
-- Scenario: should redirect to dashboard page with valid user
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user enters valid username and password
-  And user clicks on the login button
-  Then user should be redirected to the dashboard page
+**Scenario**: User should be redirected to dashboard page with valid credentials
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user logs in with valid credentials
+  **Then** user should be redirected to the dashboard page
 
-- Scenario: should redirect to login page after logout
-  Given user is on the dashboard page
-  When user clicks on dropdown profile menu
-  And user clicks on the logout button
-  n user should be redirected to the login page
+**Scenario**: User should be redirected to login page after logout
+  **Given** user is on the dashboard page
+  **When** user logs out
+  **Then** user should be redirected to the login page
 
-- Scenario: should show error message
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user enters non-existing username and password
-  And user clicks on the login button
-  Then message of an incorrect username and password should be displayed
+**Scenario**: User sees error message when logging in with invalid credentials 
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user logs in with non-existing credentials
+  **Then** login error message should be displayed
 
-- Scenario: should display logo in login form
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user click the logo
-  Then user should be remain on login page
+**Scenario**: User remains on loggin page when only email is entered
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user logs in with only valid username
+  **Then** user should be remain on the login page
 
-- Scenario: Should remain on login page when no credentials are entered
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user clicks on the login button
-  Then user should be leave on the login page
+**Scenario**: User remains on loggin page when only password is entered
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user logs in with only valid password
+  **Then** user should be remain on the login page
 
-- Scenario: Should remain on login page when only email is entered
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user enters valid username
-  And user clicks on the login button
-  Then user should be leave on the login page
+**Scenario**: User should remain on login page when no credentials are entered
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user logs in with empty credentials
+  **Then** user should be remain on the login page
 
-- Scenario: should reset password
-  Given user is on the login page https://wave-trial.getbynder.com/login/
-  When user clicks on Lost password
-  Then Reset password form should be displayed
+**Scenario**: User should be redirected to Bynder main page
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user clicks on Bynder logo
+  **Then** user should be redirected to the main page
 
-- Scenario: should cancel reset password
-  Given The user is on the login page https://wave-trial.getbynder.com/login/
-  When user clicks on Lost password
-  And user clicks on Cancel
-  Then user should be redirected to the login page
+**Scenario**: Language button should display different options
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user clicks on Language
+  **Then** list of languages should be displayed
 
-- Scenario: should redirect to main page
-  Given The user is on the login page https://wave-trial.getbynder.com/login/
-  When user clicks on Bynder logo
-  Then user should be redirected to the main page
+**Scenario**: Support button should be displayed
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** login page is loaded
+  **Then** support button should be displayed
 
-- Scenario: language button should display different options
-  Given The user is on the login page https://wave-trial.getbynder.com/login/
-  When user clicks on Language
-  Then list of langueges should be displayed
+**Scenario**: Cookie button should be displayed
+  **Given** The a user visits https://wave-trial.getbynder.com/login/
+  **When** login page is loaded
+  **Then** cookie button should be displayed
 
-- Scenario: support button should be displayed
-  Given The user is on the login page https://wave-trial.getbynder.com/login/
-  When login page is loaded
-  Then support button should be displayed
+**Scenario**: Reset password form should be displayed
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user clicks on Lost password
+  **Then** reset password form should be displayed
 
-- Scenario: cookie button should be displayed
-  Given The user is on the login page https://wave-trial.getbynder.com/login/
-  When login page is loaded
-  Then cookie button should be displayed
+**Scenario**: User cancels reset password process
+  **Given** user visits https://wave-trial.getbynder.com/login/
+  **When** user clicks on Lost password
+  **And** user clicks on Cancel
+  **Then** user should be redirected to the login page
+
 
 ## Installation
 
