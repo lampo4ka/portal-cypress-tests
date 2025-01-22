@@ -36,11 +36,13 @@ npm i
 TMDB_API_TOKEN=<token value>
 ```
 
-2. Build and run
+2. Create `reports` directory
+
+3. Build and run
 
 ```bash
 docker build -t api-tests .
-docker run -it --env-file .env --rm api-tests
+docker run -it -v ./reports:/app/cypress/results --env-file .env --rm api-tests
 ```
 
 Response schema copppied from [tmdb oas](https://developer.themoviedb.org/openapi/64542913e1f86100738e227f) and saved to ./cypress/api/fixtures/tmdb-oas.json

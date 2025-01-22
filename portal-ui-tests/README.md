@@ -40,11 +40,13 @@ PASSWORD=strongest-password-ever
 NAME=John Doe
 ```
 
-2. Build and run
+2. Create `reports` directory
+
+3. Build and run
 
 ```bash
 docker build -t ui-tests .
-docker run -it --env-file .env --rm ui-tests
+docker run -it -v ./reports:/app/cypress/results --env-file .env --rm ui-tests
 ```
 
 ## Test cases
