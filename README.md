@@ -9,7 +9,9 @@
 ## How to run
 
 You can run api and ui tests using docker compose.
-`docker compose run <project name>` where is project name can be `ui-tests` or `api-tests`
+`docker compose run <project name>` where is project name can be `ui-tests` or `api-tests`.
+
+Reports are generated in `api-reports` and `ui-reports` folders. Create them before first run in the root.
 
 To run the load tests check README in load-tests directory
 
